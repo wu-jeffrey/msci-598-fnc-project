@@ -5,6 +5,7 @@ from transformers import BertModel, BertTokenizer, AdamW, get_linear_schedule_wi
 import numpy as np
 import pandas as pd
 from collections import defaultdict
+from tqdm import tqdm
 
 import torch
 from torch import nn, optim
@@ -80,7 +81,7 @@ def train_epoch(
   losses = []
   correct_predictions = 0
   
-  for d in data_loader:
+  for d in tqdm(data_loader):
     input_ids = d["input_ids"].to(device)
     attention_mask = d["attention_mask"].to(device)
     targets = d["targets"].to(device)
